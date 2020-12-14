@@ -1,0 +1,40 @@
+nacos:
+  #可以指定nacos注册服务中心的ip
+  ip: 192.168.0.36
+  #注册中心地址
+  discovery:
+    server-addr: 47.99.200.71:8848
+  #动态刷新配置文件中心地址
+  config:
+    server-addr: 47.99.200.71:8848
+  gateway:
+    #Nacos动态路由配置
+    dynamic:
+      route:
+        enabled: true
+        dataType: nacos
+      #Nacos配置页面添加
+      routeDataId: ZUUL_DATA
+      routeGroupId: ZUUL_GATEWAY
+  #可以指定nacos注册服务中心的分组
+  application:
+    group:
+      name: TEST_GROUP
+
+#服务名称
+spring:
+  application:
+    name: test-nacos
+
+server:
+  port: 8888
+
+
+#静态zuul配置(根据自己的配置)
+zuul:
+  routes:
+    mytest:
+      path: /mytest/**
+      url: http://192.168.0.41:8989
+
+
